@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laluvv</title>
+    <style>
+        /* Body Styling */
+/* Body Styling */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('bb.png') no-repeat center center fixed; /* Set PNG as background */
+    background-size: cover;
+    background-position: center 40%; /* Adjust position to focus on the moon and sunflower */
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+        /* Front Design: Decorative Circle */
+        .decorative-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            box-shadow: 0 0 100px rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            animation: pulse 3s infinite ease-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Envelope Styling */
+        .envelope {
+            width: 140px;
+            height: 90px;
+            background-color: #ec8282;
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .envelope:hover {
+            transform: scale(1.1);
+            background-color: #ff7675;
+        }
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent;
+            border-right: 70px solid transparent;
+            border-bottom: 20px solid #fff;
+        }
+        .envelope:after {
+            content: '📩';
+            font-size: 2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Message Styling */
+        #message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            animation: fadeIn 1s ease-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hearts */
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #FF4C7B; /* Soft pink heart */
+            transform: rotate(-45deg);
+            animation: floatUp 4s infinite ease-in-out;
+        }
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #FF4C7B;
+            border-radius: 50%;
+        }
+        .heart:before {
+            left: 0;
+            top: -15px;
+        }
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+
+        /* Heart Animation */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(-45deg);
+            }
+            100% {
+                transform: translateY(-120vh) rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            #message {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            .envelope {
+                width: 110px;
+                height: 75px;
+            }
+            .envelope:before {
+                border-left: 55px solid transparent;
+                border-right: 55px solid transparent;
+                border-bottom: 15px solid #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-circle"></div>
+    <h1 id="instruction">Can you please open the envelope, my Laluv?</h1>
+    <div class="envelope" id="envelope"></div>
+    <div id="message">
+        Hi, my Laluv! ❤️<br><br>
+        Happy 21st Monthsary! 🎉<br><br>
+        I just wanted to take a moment to remind you how truly special you are to me. You’re not just someone I care about—you’re my source of happiness, my reason to smile, and the best part of every day. You make my days brighter with your presence, my heart fuller with your love, and my life so much better just by being in it.<br><br>
+        Thank you for being the amazing, loving, and wonderful person you are. 🥰 I feel so incredibly lucky and blessed to have you in my life. 💖 You mean the world to me, always and forever! 🌟 I love you so much! 💕<br><br>
+        From your Laluvv, 💌
+    </div>
+
+    <script>
+        const envelope = document.getElementById("envelope");
+        const instruction = document.getElementById("instruction");
+        const message = document.getElementById("message");
+
+        envelope.addEventListener("click", () => {
+            instruction.style.display = "none"; // Hide the instruction
+            envelope.style.display = "none"; // Hide the envelope
+            message.style.display = "block"; // Show the message
+            generateHearts(50); // Generate 50 floating hearts
+        });
+
+        function generateHearts(count) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+                document.body.appendChild(heart);
+
+                // Remove heart after animation ends
+                heart.addEventListener("animationend", () => {
+                    heart.remove();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
